@@ -29,6 +29,9 @@ static NSString* const identifier = @"054A5AC8-FA93-9D3F-2A13-FB0B7CF1C2AC"; // 
     self.messageList = [[NSMutableArray alloc] init];
     self.centralManager.delegate = self;
 
+
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -163,7 +166,11 @@ static NSString* const identifier = @"054A5AC8-FA93-9D3F-2A13-FB0B7CF1C2AC"; // 
 }
 
 -(void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
-    NSLog(@"---------didConnectPeripheral");
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.fireDate = [[NSDate date] dateByAddingTimeInterval:5];
+    notification.alertBody = [NSString stringWithFormat:@"BLE connected:%@",[NSDate date]];
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    
     self.connectedPeripheral = peripheral;
     [self.connectedPeripheral setDelegate:self];
     //[self.connectedPeripheral discoverServices:nil];
@@ -181,7 +188,12 @@ static NSString* const identifier = @"054A5AC8-FA93-9D3F-2A13-FB0B7CF1C2AC"; // 
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
-    NSLog(@"***********************************************************************************************didDisconnectPeripheral");
+
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.fireDate = [[NSDate date] dateByAddingTimeInterval:5];
+    notification.alertBody = [NSString stringWithFormat:@"BLE disconnected:%@",[NSDate date]];
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    
     [self connectDevice];
 }
 

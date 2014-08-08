@@ -11,7 +11,7 @@
 
 #define characteristicId @"DDCA9B49-A6F5-462F-A89A-C2144083CA7F"
 #define serviceId @"BD0F6577-4A38-4D71-AF1B-4E8F57708080"
-#define keepBroadCasting YES
+#define keepBroadCasting NO
 
 
 @interface ViewController () <CBPeripheralManagerDelegate>
