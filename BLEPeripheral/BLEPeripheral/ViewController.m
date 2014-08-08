@@ -58,7 +58,8 @@
     NSLog(@"peripheralManagerDidAddService: %@ %@", service, error);
     
     [peripheral startAdvertising:@{
-                                   CBAdvertisementDataLocalNameKey: @"hello2"
+                                   CBAdvertisementDataLocalNameKey: @"hello2",
+                                   CBAdvertisementDataServiceUUIDsKey : @[service.UUID]
                                    }];
 }
 
